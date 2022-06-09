@@ -1,0 +1,42 @@
+// ==UserScript==
+// @name         Remove_Trackers
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://rarbgaccessed.org/torrent/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
+// @grant        GM_setClipboard
+// ==/UserScript==
+
+// Thanks to https://gist.github.com/okierie for this function which remove something (i don't know what, but must be better)
+(function (){// just to make sure the name of the function is unique; avoiding function conflict
+  $('[href="/s/doll/"]').parent().remove();
+  $("[name='category[]'][value='4']").parent().remove();
+  $("[name='category[]'][value='4']").remove();
+  $('[href="/torrents.php?category=1;4"]').parent().remove();
+  $('[href="/torrents.php?category=1;4"]').remove();
+  $('[href="/torrents.php?category[]=4"]').parent().remove();
+  $('[href="/torrents.php?category[]=4"]').remove();
+  $('[href="/torrents.php?category=4"]').parent().parent().remove();
+  $('[href="/torrents.php?category=4"]').remove();
+  $('[href="/torrents.php?category=1;14;15;16;17;21;22;42;18;19;41;27;28;29;30;31;32;40;23;24;25;26;33;34;43;44;45;46;47;48"]').parent().remove();
+  $('[href="/torrents.php?category=1;14;15;16;17;21;22;42;18;19;41;27;28;29;30;31;32;40;23;24;25;26;33;34;43;44;45;46;47;48"]').remove();
+})()
+
+function coincoin() {
+    let link = $('[href^="magnet"]')[0].href
+    GM_setClipboard (link.substr(0,link.indexOf('&tr')));
+}
+
+(function() {
+    'use strict';
+
+    var button = $('<button/>', {
+        text: 'Copy Magnet',
+        click: coincoin
+    });
+
+    $('[href^="magnet"]')[0].parentElement.append(button[0]);
+
+})();
