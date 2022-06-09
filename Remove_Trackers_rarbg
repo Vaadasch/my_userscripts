@@ -10,12 +10,14 @@
 // ==/UserScript==
 
 function coincoin() {
-    let link = $('[href^="magnet"]')[0].href
-    GM_setClipboard (link.substr(0,link.indexOf('&tr')));
+    GM_setClipboard ($('[href^="magnet"]')[0].href);
 }
 
 (function() {
     'use strict';
+
+    let magnet = $('[href^="magnet"]')[0]
+    magnet.href = magnet.href.substr(0,magnet.href.indexOf('&tr'))
 
     var button = $('<button/>', {
         text: 'Copy Magnet',
